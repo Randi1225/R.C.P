@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    // Insertando usando tu tabla 'mesa' con id_estado por defecto 1 (libre)
     $sql = "INSERT INTO mesa (numero, ancho, id_estado, pos_x, pos_y) VALUES (?, ?, 1, 20, 20)";
     $stmt = mysqli_prepare($conexion, $sql);
     if ($stmt) {

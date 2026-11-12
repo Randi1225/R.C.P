@@ -26,7 +26,6 @@ if (isset($_GET["pagina"])) {
 $desdequeelemento = ($pagina - 1) * $limite;
 $filtro = trim($_GET["filtro"] ?? "");
 
-// Consulta principal con LEFT JOIN
 $sql = "SELECT p.id_pedido, 
                p.descripcion, 
                p.fecha_hora_creacion, 
@@ -47,10 +46,8 @@ $params = array();
 $types = "";
 
 if ($filtro === "cocina") {
-    // Pedidos activos para el panel de Cocina
     $sql .= " WHERE LOWER(ep.nombre) IN ('pendiente', 'en preparación', 'en preparacion')";
 } elseif ($filtro === "sin_cobrar") {
-    // Pedidos listos para cobrar (excluye Finalizados, Cobrados o Cancelados)
     $sql .= " WHERE LOWER(ep.nombre) NOT IN ('finalizado', 'cobrado', 'cancelado', 'anulado')";
 } elseif ($filtro !== "" && $filtro !== "undefined") {
     $sql .= " WHERE (p.id_pedido LIKE ? 
@@ -78,7 +75,6 @@ if ($stmt) {
 
     $pedidos = array();
     while ($row = mysqli_fetch_assoc($resultado)) {
-        // Consultar productos asociados
         $idPed = $row['id_pedido'];
         $sqlProd = "SELECT c.cantidad, pr.nombre 
                     FROM Contiene c 

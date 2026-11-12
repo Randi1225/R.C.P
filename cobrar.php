@@ -5,7 +5,6 @@ verificar_sesion();
 $nombre_empleado =$_SESSION['empleado_nombre'] ?? 'Empleado';
 include_once("includes/conexionBD.php");
 
-// Consultar si hay una caja abierta
 $res_turno = mysqli_query($conexion, "SELECT id_turno FROM turno_caja WHERE fecha_hora_cierre IS NULL LIMIT 1");
 $turno_activo = mysqli_fetch_assoc($res_turno);
 ?>
@@ -98,7 +97,6 @@ $turno_activo = mysqli_fetch_assoc($res_turno);
                         tbody.appendChild(tr);
                     });
 
-                    // Asignar eventos de clic de forma dinámica a todos los botones generados
                     document.querySelectorAll('.btn-cobrar').forEach(boton => {
                         boton.addEventListener('click', function() {
                             const idPedido = this.getAttribute('data-id');

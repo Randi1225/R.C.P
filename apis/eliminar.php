@@ -16,19 +16,19 @@ if (isset($_GET["tipo"]) && isset($_GET["id"])) {
 
     switch ($tipo) {
         case "insumo":
-            $tabla = "Insumo"; // Revisa si esta tabla también está en plural (ej: insumos)
+            $tabla = "Insumo";
             $campo_id = "id_insumo";
             break;
         case "cliente":
-            $tabla = "Cliente"; // Revisa si esta tabla está en plural (ej: clientes)
+            $tabla = "Cliente";
             $campo_id = "id_cliente";
             break;
         case "producto":
-            $tabla = "Producto"; // Revisa si esta tabla está en plural (ej: productos)
+            $tabla = "Producto"; 
             $campo_id = "id_producto";
             break;
         case "empleado":
-            $tabla = "empleados"; // <--- Nombre exacto de tu tabla en la BD
+            $tabla = "empleados"; 
             $campo_id = "id_empleado";
             break;
         default:

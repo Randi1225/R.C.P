@@ -723,11 +723,6 @@ hr, .separador {
   list-style: none;
 }
 
-/* ========================================== */
-/* RESPONSIVE FLUIDO PARA LOGIN Y TARJETAS */
-/* ========================================== */
-
-/* Contenedor general del login para que ocupe toda la pantalla con un margen seguro */
 .contenedor-login {
     display: flex;
     align-items: center;
@@ -737,29 +732,26 @@ hr, .separador {
     box-sizing: border-box;
 }
 
-/* Tarjeta de login adaptable a celulares */
 .tarjeta-login {
     width: 100%;
-    max-width: 420px; /* Tamaño máximo en PC */
+    max-width: 420px; 
     padding: 2rem;
     box-sizing: border-box;
 }
 
-/* En pantallas chicas (celulares), ajustamos los paddings y márgenes automáticamente */
 @media screen and (max-width: 480px) {
     .tarjeta-login {
-        padding: 1.5rem 1rem; /* Menos padding lateral para aprovechar la pantalla */
-        border: none; /* Opcional: quitar borde si ocupa todo el ancho */
-        box-shadow: none; /* Diseño más limpio en móviles */
+        padding: 1.5rem 1rem; 
+        border: none; 
+        box-shadow: none; 
     }
 
-    /* Asegurar que los inputs tengan un tamaño táctil cómodo (mínimo 44px de alto) */
     input[type="email"],
     input[type="password"],
     input[type="text"],
     .btn-publish,
     .boton-login {
         padding: 12px 14px;
-        font-size: 16px; /* Evita que iOS haga zoom automático en los inputs */
+        font-size: 16px; 
     }
 }

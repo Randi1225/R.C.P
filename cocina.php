@@ -40,18 +40,16 @@ $nombre_empleado =$_SESSION['empleado_nombre'] ?? 'Cocinero';
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             cargarComandas();
-            setInterval(cargarComandas, 10000); // Actualiza cada 10 segundos
+            setInterval(cargarComandas, 10000); 
         });
 
         function cargarComandas() {
-            // Se traen tanto los pedidos 'Pendiente' como 'En preparación'
             fetch('apis/api_pedidos.php?filtro=cocina')
                 .then(response => response.json())
                 .then(pedidos => {
                     const contenedor = document.getElementById("contenedorComandas");
                     contenedor.innerHTML = "";
 
-                    // Filtrar pedidos relevantes para cocina si la API devuelve todos
                     const pedidosCocina = Array.isArray(pedidos) ? pedidos.filter(p => {
                         const est = (p.estado || '').toLowerCase();
                         return est === 'pendiente' || est === 'en preparación' || est === 'en preparacion';
@@ -72,7 +70,7 @@ $nombre_empleado =$_SESSION['empleado_nombre'] ?? 'Cocinero';
 
                         const estadoNormalizado = (pedido.estado || '').toLowerCase();
                         let botonAccion = '';
-                        let colorEstado = '#f59e0b'; // Naranja para Pendiente
+                        let colorEstado = '#f59e0b'; 
 
                         if (estadoNormalizado === 'pendiente') {
                             botonAccion = `
@@ -80,7 +78,7 @@ $nombre_empleado =$_SESSION['empleado_nombre'] ?? 'Cocinero';
                                     Comenzar Preparación 👨‍🍳
                                 </button>`;
                         } else if (estadoNormalizado === 'en preparación' || estadoNormalizado === 'en preparacion') {
-                            colorEstado = '#3b82f6'; // Azul para En Preparación
+                            colorEstado = '#3b82f6'; 
                             botonAccion = `
                                 <button onclick="cambiarEstadoPedido(${pedido.id_pedido}, 'Listo')" style="background: var(--accent-green); color: #000; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 5px;">
                                     Marcar como Listo 🍲

@@ -165,7 +165,7 @@ mysqli_query($conexion, $sql_clean);
                 </div>
                 <?php endif; ?>
 
-                <button type="submit" class="boton-login">Entrar</button>
+                <button type="submit" class="boton-login">Iniciar Sesion</button>
 
                 <div style="text-align: center; margin-top: 15px;">
                     <a href="recuperar.php" style="color: var(--color-text-muted); font-size: 13px; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--color-text-muted)'">¿Olvidaste tu contraseña?</a>

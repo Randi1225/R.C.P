@@ -7,19 +7,16 @@ $nombre_empleado = $_SESSION['empleado_nombre'] ?? 'Empleado';
 $id_empleado_sesion = $_SESSION['empleado_id'] ?? $_SESSION['id_empleado'] ?? $_SESSION['id_usuario'] ?? null;
 $mensaje = "";
 
-// 1. Obtener el turno de caja abierto actualmente
 $sqlTurnoAbierto = "SELECT id_turno FROM turno_caja WHERE fecha_hora_cierre IS NULL LIMIT 1";
 $resTurnoAbierto = mysqli_query($conexion, $sqlTurnoAbierto);
 $turnoAbierto = mysqli_fetch_assoc($resTurnoAbierto);
 $idTurnoActual = $turnoAbierto ? (int)$turnoAbierto['id_turno'] : null;
 
-// 2. Obtener el id_estado para 'Pendiente' automáticamente
 $sqlEstadoPendiente = "SELECT id_estado FROM Estado_Pedido WHERE LOWER(nombre) = 'pendiente' LIMIT 1";
 $resEstadoPendiente = mysqli_query($conexion, $sqlEstadoPendiente);
 $filaEstadoPendiente = mysqli_fetch_assoc($resEstadoPendiente);
 $idEstadoPendiente = $filaEstadoPendiente ? (int)$filaEstadoPendiente['id_estado'] : 1; // 1 como fallback
 
-// Consultas para poblar los demás selectores
 $mesas = array();
 $consultaMesas = mysqli_query($conexion, "SELECT id_mesa, numero FROM Mesa ORDER BY numero ASC");
 if ($consultaMesas) {
@@ -238,7 +235,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
             <div style="display: flex; gap: 12px;">
-                <!-- Estado fijado informativamente a Pendiente -->
                 <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
                     <label style="color: var(--color-text-body); font-weight: 500; font-size: 14px;">Estado Inicial</label>
                     <div style="padding: 10px 15px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: #f59e0b; font-size: 14px; font-weight: 500;">

@@ -22,7 +22,6 @@ if ($accion === 'eliminar') {
     exit();
 }
 
-// Consultar historial de turnos cerrados
 $fecha = trim($_GET['fecha'] ?? '');
 
 if ($fecha !== '') {
@@ -40,7 +39,7 @@ if ($fecha !== '') {
             INNER JOIN empleados e ON t.id_empleado = e.id_empleado 
             WHERE t.fecha_hora_cierre IS NOT NULL 
             ORDER BY t.id_turno DESC 
-            LIMIT 100"; // Últimos 100 registros por rendimiento
+            LIMIT 100"; 
     $stmt = mysqli_prepare($conexion, $sql);
 }
 

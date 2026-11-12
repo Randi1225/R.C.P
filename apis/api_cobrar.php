@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    // 1. Buscar turno abierto
     $sqlTurno = "SELECT id_turno FROM turno_caja WHERE fecha_hora_cierre IS NULL LIMIT 1";
     $resTurno = mysqli_query($conexion, $sqlTurno);
     if (!$resTurno) {
@@ -45,15 +44,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $idTurno = (int)$turnoActivo['id_turno'];
 
-    // 2. Buscar el id_estado para 'Cobrado' usando exactamente la tabla estado_pedido
-    $idEstadoCobrado = 7; // Valor por defecto si ya lo agregaste
+    $idEstadoCobrado = 7; 
     $sqlEstado = "SELECT id_estado FROM estado_pedido WHERE LOWER(nombre) = 'cobrado' LIMIT 1";
     $resEst = mysqli_query($conexion, $sqlEstado);
     if ($resEst && $rowEst = mysqli_fetch_assoc($resEst)) {
         $idEstadoCobrado = (int)$rowEst['id_estado'];
     }
 
-    // 3. Actualizar el pedido (cambia estado a Cobrado y le asigna el turno activo)
     $sqlUpdate = "UPDATE pedido SET id_estado = ?, id_turno = ? WHERE id_pedido = ?";
     $stmt = mysqli_prepare($conexion, $sqlUpdate);
     if (!$stmt) {

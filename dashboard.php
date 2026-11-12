@@ -7,15 +7,11 @@ verificar_sesion();
 $nombre_empleado = $_SESSION['empleado_nombre'] ?? 'Empleado';
 $id_rol = $_SESSION['empleado_rol'] ?? 0;
 
-// Definir si es rol gerencial/admin o empleado operativo (ajusta los IDs según tu base de datos)
-// Por ejemplo, asumimos que rol 1 o 2 (o administrador/encargado) ven las alertas de stock
 $esAdmin = ($id_rol == 1 || $id_rol == 2); 
 
-// Consultar pedidos listos para entregar
 $sql_pedidos = "SELECT id_pedido, mesa, cliente FROM pedidos WHERE LOWER(estado) = 'listo' LIMIT 5";
 $res_pedidos = mysqli_query($conexion, $sql_pedidos);
 
-// Consultar insumos críticos (stock bajo) si es admin/encargado
 $insumos_criticos = [];
 if ($esAdmin) {
     $sql_insumos = "SELECT nombre, stock_actual, stock_minimo FROM insumos WHERE stock_actual <= stock_minimo LIMIT 5";
@@ -49,7 +45,6 @@ if ($esAdmin) {
 
     <div class="app-layout" style="display: block; padding: 15px; max-width: 800px; margin: 0 auto; box-sizing: border-box;">
         
-        <!-- SECCIÓN DE ALERTAS RÁPIDAS (DASHBOARD INTELIGENTE) -->
         <div style="margin-bottom: 25px;">
             <h3 style="color: var(--color-text-main); font-size: 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
                 <i class="ri-notification-3-line" style="color: var(--accent-cyan);"></i> Alertas y Pendientes
@@ -57,7 +52,6 @@ if ($esAdmin) {
 
             <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
                 
-                <!-- Alerta de Pedidos Listos -->
                 <div style="background: var(--bg-card); padding: 15px; border-radius: 8px; border: 1px solid var(--border-subtle);">
                     <h4 style="color: var(--accent-green); font-size: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
                         <i class="ri-checkbox-circle-line"></i> Pedidos Listos para Entregar
@@ -76,7 +70,6 @@ if ($esAdmin) {
                     <?php endif; ?>
                 </div>
 
-                <!-- Alerta de Insumos (Solo para Admins/Encargados) -->
                 <?php if ($esAdmin): ?>
                 <div style="background: var(--bg-card); padding: 15px; border-radius: 8px; border: 1px solid var(--border-subtle);">
                     <h4 style="color: var(--accent-red); font-size: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
@@ -100,7 +93,6 @@ if ($esAdmin) {
             </div>
         </div>
 
-        <!-- MENÚ DE NAVEGACIÓN RÁPIDA -->
         <h3 style="color: var(--color-text-main); font-size: 18px; margin-bottom: 12px;">Módulos del Sistema</h3>
         <ul id="menu-lateral" class="menu-lateral" style="position: static; width: 100%; box-shadow: none; background: transparent; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
             <li>

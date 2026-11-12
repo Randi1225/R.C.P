@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    // Buscar el id_estado correspondiente al nombre solicitado
     $sqlEstado = "SELECT id_estado FROM Estado_Pedido WHERE LOWER(nombre) = LOWER(?) LIMIT 1";
     $stmtEst = mysqli_prepare($conexion, $sqlEstado);
     mysqli_stmt_bind_param($stmtEst, "s", $nombreEstado);
@@ -34,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $idEstadoNuevo = (int)$rowEst["id_estado"];
 
-    // Actualizar el estado del pedido
     $sqlUpdate = "UPDATE Pedido SET id_estado = ? WHERE id_pedido = ?";
     $stmtUp = mysqli_prepare($conexion, $sqlUpdate);
     mysqli_stmt_bind_param($stmtUp, "ii", $idEstadoNuevo, $idPedido);

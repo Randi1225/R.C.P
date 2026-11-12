@@ -13,7 +13,6 @@ $nombre_empleado = $_SESSION['empleado_nombre'] ?? 'Empleado';$esAdmin = tieneRo
     <link rel="stylesheet" href="includes/style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
-        /* Ajustes responsivos específicos para móviles */
         @media screen and (max-width: 768px) {
             .contenedor-insumos {
                 padding: 10px !important;

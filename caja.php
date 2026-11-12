@@ -7,7 +7,6 @@ $id_empleado = $_SESSION['empleado_id'] ?? $_SESSION['id_empleado'] ?? 0;
 
 include_once("includes/conexionBD.php");
 
-// 1. Buscar si hay un turno de caja abierto
 $sql_turno = "SELECT t.*, e.nombre, e.apellido 
               FROM turno_caja t 
               INNER JOIN empleados e ON t.id_empleado = e.id_empleado 
@@ -22,8 +21,6 @@ $monto_esperado_total = 0;
 if ($turno_abierto) {
     $id_turno_actual = $turno_abierto['id_turno'];
 
-    // 2. Sumar todos los pedidos cobrados / finalizados de este turno
-    // Se excluyen los pedidos cancelados si los hubiera
     $sql_acumulado = "SELECT COALESCE(SUM(p.monto_total), 0) AS total_ventas 
                       FROM Pedido p 
                       INNER JOIN Estado_Pedido ep ON p.id_estado = ep.id_estado

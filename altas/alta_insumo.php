@@ -152,7 +152,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
 
-    <!-- Barra Superior -->
     <div class="contenido-principal" style="padding: 0;">
         <div class="barra-superior" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: #0f172a; border-bottom: 1px solid #1e293b;">
             <h1 style="color: #fff; font-size: 20px; display: flex; align-items: center; gap: 10px; margin: 0;">
@@ -166,7 +165,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 
-    <!-- Contenedor del Formulario -->
     <div class="form-wrapper">
         <h2>Registrar Nuevo Insumo</h2>
 
